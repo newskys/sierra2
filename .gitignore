@@ -26,4 +26,8 @@
 /.nb-gradle/
 
 /src/main/webapp/web-react/package-lock.json
-/src/main/webapp/web-react/node_modules/
+/src/main/webapp/web-react/node_modules/package-lock.json
+node_modules/
+out/
+out/
+.gradle/
