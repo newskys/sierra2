@@ -1,4 +1,4 @@
-package sierra2.Member;
+package sierra2.member;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;

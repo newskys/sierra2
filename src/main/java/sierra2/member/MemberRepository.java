@@ -1,4 +1,4 @@
-package sierra2.Member;
+package sierra2.member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
