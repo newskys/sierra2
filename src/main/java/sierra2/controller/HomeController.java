@@ -30,7 +30,7 @@ public class HomeController {
         return new ResponseEntity<>(member, HttpStatus.OK);
     }
 
-    @GetMapping("/login")
+//    @GetMapping("/login")
     @PostMapping("/login")
     public ResponseEntity<String> login(HttpServletRequest request, HttpServletResponse response) {
         String userId = request.getParameter("userId");
