@@ -24,13 +24,13 @@ public class HomeController {
 
     @GetMapping("/test")
     public ResponseEntity<Member> test() {
-        Member member = memberRepository.selectByUserId("newskys");
+        Member member = memberRepository.findByUserId("newskys");
         return new ResponseEntity<>(member, HttpStatus.OK);
     }
 
     @GetMapping("/login")
     public ResponseEntity<String> login(String id, HttpServletResponse response) {
-        Member member = memberRepository.selectByUserId(id);
+        Member member = memberRepository.findByUserId(id);
 
         if (member == null || StringUtils.isEmpty(member.getId())) {
             return new ResponseEntity<>("bad", HttpStatus.BAD_REQUEST);
