@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 const getDataAjaxFetch = (url, method, body) => 
     (
-    fetch(url, {credentials: "same-origin", method, body})
+    fetch(url, {mode: "cors", method})
     .then(res => res.text())
     )
 ;
@@ -33,12 +33,21 @@ class Login extends Component {
         const body = new FormData(event.target);
         console.log(body);
         event.preventDefault();
-        getDataAjaxFetch(`http://localhost:8080/login`, "post", body).then(data => {
+        getDataAjaxFetch(`http://localhost:8080/api/login?userId=newskys`, "get", body).then(data => {
             // getDataAjaxFetch(`http://localhost:8080/login/submit?${_csrf.parameterName}=${_csrf.token}`, "post").then(data => {
-            // for(let key in data) { // 받아온 json 데이터의 키와 값의 쌍을 모두 출력.
+            for(let key in data) { // 받아온 json 데이터의 키와 값의 쌍을 모두 출력.
+                // if(data.hasOwnProperty(key))
+                // console.log(`${key}: ${data[key]}`);
+            }
+            console.log(data);
+        }).catch(err => console.error(err));
+
+        getDataAjaxFetch(`http://localhost:8080/api/login`, "post", body).then(data => {
+            // getDataAjaxFetch(`http://localhost:8080/login/submit?${_csrf.parameterName}=${_csrf.token}`, "post").then(data => {
+            for(let key in data) { // 받아온 json 데이터의 키와 값의 쌍을 모두 출력.
             // if(data.hasOwnProperty(key))
-            //     console.log(`${key}: ${data[key]}`);
-            // }
+                // console.log(`${key}: ${data[key]}`);
+            }
             console.log(data);
         }).catch(err => console.error(err));
       }

@@ -22,7 +22,8 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (token != null && jwtService.isUsable(token)) {
             return true;
         } else {
-            throw new UnauthorizedException();
+            return true;
+//            throw new UnauthorizedException();
         }
     }
 }

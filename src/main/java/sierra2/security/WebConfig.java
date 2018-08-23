@@ -9,9 +9,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     private static final String[] EXCLUDE_PATHS = {
-            "/member/**",
             "/error/**",
-            "/api/**"
+            "/api/login",
+            "/"
     };
 
     @Autowired
@@ -27,6 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "HEAD");
+                .allowedOrigins("http://localhost")
+                .allowedMethods("OPTIONS", "GET", "POST", "PUT", "DELETE", "PATCH", "HEAD");
     }
 }
