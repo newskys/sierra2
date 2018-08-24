@@ -13,6 +13,7 @@ module.exports = {
         host: "localhost",
         port: PORT,
         open: true,
+        historyApiFallback: true,
         // contentBase: "./src"
     },
     entry: {
@@ -21,7 +22,8 @@ module.exports = {
     output: {
         path:  path.resolve(__dirname, "./static/"),
         filename: '[name].js',
-        chunkFilename: "[name].js"
+        chunkFilename: "[name].js",
+        publicPath: '/'
     },
     module: {
         rules: [
