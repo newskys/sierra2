@@ -15,15 +15,23 @@ class Login extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <form name="login" onSubmit={event => this.handleSubmit(event)}>
-                <input type="text" id="userId" name="userId" onChange={event => this.updateInputValue(event)} />
-                <input type="password" id="password" name="password" onChange={event => this.updateInputValue(event)} />
-                <button type="submit" name="login">submit</button>
-                </form>
-            </div>
-        );
+        if (this.props.user.token === "") {
+            return (
+                <div>
+                    <form name="login" onSubmit={event => this.handleSubmit(event)}>
+                        <input type="text" id="userId" name="userId" onChange={event => this.updateInputValue(event)} />
+                        <input type="password" id="password" name="password" onChange={event => this.updateInputValue(event)} />
+                        <button type="submit" name="login">submit</button>
+                    </form>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    Log on!
+                </div>
+            );
+        }
     }
 
     handleSubmit(event) {

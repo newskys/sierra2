@@ -9,13 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
-    private static final String HEADER_AUTH = "sierraToken";
+    private static final String HEADER_AUTH = "Authorization";
 
     @Autowired
     private JwtService jwtService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        if (request.getMethod().equals("OPTIONS")) {
+            return true;
+        }
 
         final String token = request.getHeader(HEADER_AUTH);
 

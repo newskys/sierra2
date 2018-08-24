@@ -15,7 +15,8 @@ class View extends Component {
             url: `http://localhost:8080/docs/read`,
             method: "get",
             timeout: 1000,
-            headers: {sierraToken: this.props.user.token}
+            onUploadProgress: null,
+            headers: {Authorization: this.props.user.token}
         })
             .then(data => data.data)
             .then(res => {
