@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
-                .addPathPatterns("/*")
+                .addPathPatterns("/**")
                 .excludePathPatterns(EXCLUDE_PATHS);
     }
 

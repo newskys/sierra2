@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-
-const getDataAjaxFetch = (url, method, body) => 
-    (
-    fetch(url, {mode: "cors", method, body})
-    .then(res => res.text())
-    )
-;
+import axios from 'axios';
+import {connect} from "react-redux";
+import {compose} from "redux";
+import {setUserInfo} from "../reducers/user";
 
 class Login extends Component {
     constructor(props) {
@@ -33,24 +30,25 @@ class Login extends Component {
         const body = new FormData(event.target);
         console.log(body);
         event.preventDefault();
-        // const config = {
-        //     url: "http://localhost:8080/api/login",
-        //     headers: {'Content-Type': 'multipart/form-data'},
-        //     method: "post",
-        //     data: body
-        // }
-        // axios.request(config)
-        //     .then(data => {
-        //         console.log(data);
-        //     }).catch(err => console.error(err));
-        getDataAjaxFetch(`http://localhost:8080/api/login`, "post", body).then(data => {
-            // getDataAjaxFetch(`http://localhost:8080/login/submit?${_csrf.parameterName}=${_csrf.token}`, "post").then(data => {
-            for(let key in data) { // 받아온 json 데이터의 키와 값의 쌍을 모두 출력.
-            // if(data.hasOwnProperty(key))
-                // console.log(`${key}: ${data[key]}`);
-            }
-            console.log(data);
-        }).catch(err => console.error(err));
+        const config = {
+            url: "http://localhost:8080/api/login",
+            headers: {'Content-Type': 'multipart/form-data'},
+            method: "post",
+            data: body
+        }
+        axios.request(config)
+            .then(data => {
+                alert("로그인에 성공했습니다.");
+                const userInfo = {
+                    userId: this.state.userId,
+                    token: data.data
+                };
+                this.props.setUserInfo(userInfo);
+            }).catch(err => {
+                if (!!err && !!err.response && err.response.status === "406") {
+                    alert("유효하지 않은 정보입니다.");
+                }
+            });
       }
 
     updateInputValue(event) {
@@ -62,4 +60,17 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    user: state.user
+});
+
+const mapDispatchToProps = dispatch => ({
+    setUserInfo: userInfo => dispatch(setUserInfo(userInfo))
+});
+
+export default compose(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )
+)(Login);

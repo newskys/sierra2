@@ -36,12 +36,12 @@ public class HomeController {
         Member member = memberRepository.findByUserId(userId);
 
         if (member == null || StringUtils.isEmpty(member.getId())) {
-            return new ResponseEntity<>("bad", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("bad", HttpStatus.NOT_ACCEPTABLE);
         }
 
         String token = jwtService.create(member.getUserId(), member, "member");
-        response.setHeader("Authorization", token);
+//        response.setHeader("Authorization", token);
 
-        return new ResponseEntity<>("", HttpStatus.OK);
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 }

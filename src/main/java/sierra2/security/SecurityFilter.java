@@ -22,9 +22,9 @@ public class SecurityFilter implements Filter {
 
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         httpResponse.setHeader("Access-Control-Allow-Origin", "*");
-        httpResponse.setHeader("Access-Control-Allow-Methods", "*");
+        httpResponse.setHeader("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
         httpResponse.setHeader("Access-Control-Max-Age", "3600");
-        httpResponse.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+        httpResponse.setHeader("Access-Control-Allow-Headers", "*");
 
         chain.doFilter(request, httpResponse);
     }

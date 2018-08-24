@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
-    private static final String HEADER_AUTH = "Authorization";
+    private static final String HEADER_AUTH = "sierraToken";
 
     @Autowired
     private JwtService jwtService;
@@ -22,8 +22,8 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (token != null && jwtService.isUsable(token)) {
             return true;
         } else {
-            return true;
-//            throw new UnauthorizedException();
+//            return true;
+            throw new UnauthorizedException();
         }
     }
 }
