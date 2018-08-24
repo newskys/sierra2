@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {connect} from "react-redux";
 import {compose} from "redux";
+import {connect} from "react-redux";
 import {setUserInfo} from "../reducers/user";
 
 class Login extends Component {
@@ -43,7 +43,7 @@ class Login extends Component {
             headers: {'Content-Type': 'multipart/form-data'},
             method: "post",
             data: body
-        }
+        };
         axios.request(config)
             .then(data => {
                 alert("로그인에 성공했습니다.");
