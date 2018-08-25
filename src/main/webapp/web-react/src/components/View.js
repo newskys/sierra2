@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from "react-redux";
 import {compose} from "redux";
+import {withRouter} from 'react-router-dom';
 
 class View extends Component {
     constructor(props) {
@@ -24,7 +25,11 @@ class View extends Component {
                 this.setState({
                     contents: res
                 })
-            }).catch(res => console.log(res));
+            }).catch(res => {
+                if (res.response.status === 500) {
+                    this.props.history.push("/Login");
+                }
+            });
     }
 
 
@@ -48,4 +53,5 @@ export default compose(
         mapStateToProps,
         mapDispatchToProps
     )
+    , withRouter
 )(View);

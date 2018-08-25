@@ -46,7 +46,7 @@ class Login extends Component {
         };
         axios.request(config)
             .then(data => {
-                alert("로그인에 성공했습니다.");
+                console.log("login succeed");
                 const userInfo = {
                     userId: this.state.userId,
                     token: data.data
