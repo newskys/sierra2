@@ -41,6 +41,7 @@ class Login extends Component {
         const config = {
             url: "http://localhost:8080/api/login",
             headers: {'Content-Type': 'multipart/form-data'},
+            onUploadProgress: null,
             method: "post",
             data: body
         };

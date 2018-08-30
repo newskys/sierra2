@@ -53,23 +53,29 @@ class Write extends Component {
                     }}
                 />
                 <button
-                    onClick={this.submit("newskys", `${draftToHtml(convertToRaw(editorState.getCurrentContent()))}`)}>submit
+                    onClick={this.submit(``, `${draftToHtml(convertToRaw(editorState.getCurrentContent()))}`)}>submit
                 </button>
             </div>
         );
     }
 
-    submit(userId, contents) {
+    submit(title, contents) {
         return () => {
             contents = encodeURIComponent(contents);
             console.log(contents);
             const config = {
-                url: `http://localhost:8080/docs/save?userId=${userId}&contents=${contents}`,
-                method: "get",
+                url: `http://localhost:8080/docs/save`,
+                method: "post",
                 timeout: "1000",
                 onUploadProgress: null,
-                headers: {Authorization: this.props.user.token}
+                headers: {Authorization: this.props.user.token, 'Content-Type': 'application/json'},
+                data: JSON.stringify({
+                    userId: this.props.user.userId,
+                    title: `${title}`,
+                    contents: `${contents}`
+                })
             };
+            console.log(config.data);
             axios.request(config)
                 .then(data => console.log(data))
                 .catch(err => console.error(err));

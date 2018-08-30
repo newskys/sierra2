@@ -36,6 +36,9 @@ class View extends Component {
     render() {
         return (
             <div>
+                <div>
+
+                </div>
                 <textarea readOnly value={this.state.contents}></textarea>
             </div>
         );
