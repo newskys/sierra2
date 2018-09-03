@@ -17,7 +17,8 @@ class Write extends Component {
         super(props);
 
         this.state = {
-            editorState: EditorState.createEmpty()
+            editorState: EditorState.createEmpty(),
+            title: ""
         }
     }
 
@@ -27,11 +28,18 @@ class Write extends Component {
         });
     }
 
+    onTitleStateChange(e) {
+        this.setState({
+            ...this.state,
+            title: e.target.value
+        })
+    }
+
     render() {
         const {editorState} = this.state;
         return (
             <div>
-                <input type="text"/>
+                <input onChange={this.onTitleStateChange.bind(this)} type="text"/>
                 <Editor
                     toolbar={{
                         options: ['inline', 'link', 'embedded', 'image', 'emoji'],
@@ -53,7 +61,7 @@ class Write extends Component {
                     }}
                 />
                 <button
-                    onClick={this.submit(``, `${draftToHtml(convertToRaw(editorState.getCurrentContent()))}`)}>submit
+                    onClick={this.submit(`${this.state.title}`, `${draftToHtml(convertToRaw(editorState.getCurrentContent()))}`)}>submit
                 </button>
             </div>
         );

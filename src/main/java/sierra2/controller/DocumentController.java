@@ -31,6 +31,7 @@ public class DocumentController {
         }
 
         String userId = payload.get("userId");
+        String title = payload.get("title");
         String contents = payload.get("contents");
 
         if (StringUtils.isEmpty(userId) ||StringUtils.isEmpty(contents)) {
@@ -39,6 +40,7 @@ public class DocumentController {
 
         Document document = new Document();
         document.setUserId(userId);
+        document.setTitle(title);
         document.setContents(contents);
         Date now = new Date();
         document.setCreateDate(now);
